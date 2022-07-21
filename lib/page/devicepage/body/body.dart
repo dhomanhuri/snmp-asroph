@@ -31,11 +31,11 @@ class Body extends StatelessWidget {
       padding: const EdgeInsets.all(11),
       width: double.infinity,
       height: double.infinity,
-      // decoration: const BoxDecoration(
-      //     gradient: LinearGradient(
-      //         begin: Alignment.topCenter,
-      //         end: Alignment.bottomCenter,
-      //         colors: [Colors.white, Colors.white])),
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.blueAccent, Colors.white])),
       child: Column(
         children: [
           SizedBox(

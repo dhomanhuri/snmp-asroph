@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dart_snmp: ^2.0.0
   # snmp: ^0.0.7
-  # syncfusion_flutter_charts: ^18.4.49
+  syncfusion_flutter_charts: ^18.4.49
   fl_chart: ^0.12.0
   pie_chart: ^5.1.0
   # syncfusion_flutter_charts: ^20.2.36

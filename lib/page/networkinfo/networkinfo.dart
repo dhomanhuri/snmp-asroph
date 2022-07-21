@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snmp/page/networkinfo/body/Body.dart';
+import 'package:snmp/page/networkinfo/body/charttest.dart';
 
 import '../../components/coustom_bottom_nav_bar.dart';
 import '../../enums.dart';
@@ -16,6 +17,7 @@ class NetworkInfo extends StatelessWidget {
       body: const Body(),
       bottomNavigationBar:
           const CustomBottomNavBar(selectedMenu: MenuState.favourite),
+      resizeToAvoidBottomInset: true,
     );
   }
 }

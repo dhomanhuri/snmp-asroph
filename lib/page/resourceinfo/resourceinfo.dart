@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snmp/page/resourceinfo/body/body.dart';
+import 'package:snmp/page/resourceinfo/body/body2.dart';
 
 import '../../components/coustom_bottom_nav_bar.dart';
 import '../../enums.dart';
@@ -13,7 +14,7 @@ class ResourceInfo extends StatelessWidget {
       // appBar: AppBar(
       //   title: const Text('Resource Information'),
       // ),
-      body: Body(),
+      body: Body2(),
       bottomNavigationBar:
           CustomBottomNavBar(selectedMenu: MenuState.favourite),
     );

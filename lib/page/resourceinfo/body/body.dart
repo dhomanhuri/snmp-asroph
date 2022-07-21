@@ -4,6 +4,7 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:dart_snmp/dart_snmp.dart';
 import 'package:snmp/globals.dart' as globals;
+import 'package:snmp/page/resourceinfo/body/body2.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -30,9 +31,6 @@ class _BodyState extends State<Body> {
     // print(message.pdu.varbinds[0]);
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
-    // setState(() {
-    //   cpuusage = (int.parse(listname[1]) / 1000).toString() + 'kB';
-    // });
     print(devicename);
     return devicename;
   }
@@ -63,119 +61,123 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(11),
       width: double.infinity,
       height: double.infinity,
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 30,
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.blueAccent, Colors.white])),
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 30,
+          ),
+          const Text(
+            'Resource Info',
+            style: TextStyle(
+              fontSize: 22,
             ),
-            const Text(
-              'Resource Info',
-              style: TextStyle(
-                fontSize: 22,
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 35,
-            ),
-            const Text('CPU Info'),
-            Container(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: PieChart(
-                    dataMap: dataMap,
-                    colorList: colorList,
-                    chartRadius: MediaQuery.of(context).size.width / 2,
-                    // centerText: "Budget",
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 35,
+          ),
+          const Text('CPU Info'),
+          Container(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: PieChart(
+                  dataMap: dataMap,
+                  colorList: colorList,
+                  chartRadius: MediaQuery.of(context).size.width / 2,
+                  // centerText: "Budget",
 
-                    ringStrokeWidth: 24,
-                    animationDuration: const Duration(seconds: 3),
-                    chartValuesOptions: const ChartValuesOptions(
-                        showChartValues: true,
-                        showChartValuesOutside: true,
-                        showChartValuesInPercentage: true,
-                        showChartValueBackground: false),
-                    legendOptions: const LegendOptions(
-                        showLegends: true,
-                        legendShape: BoxShape.circle,
-                        legendTextStyle: TextStyle(fontSize: 15),
-                        legendPosition: LegendPosition.right,
-                        showLegendsInRow: true),
-                    gradientList: gradientList,
-                  ),
+                  ringStrokeWidth: 24,
+                  animationDuration: const Duration(seconds: 3),
+                  chartValuesOptions: const ChartValuesOptions(
+                      showChartValues: true,
+                      showChartValuesOutside: true,
+                      showChartValuesInPercentage: true,
+                      showChartValueBackground: false),
+                  legendOptions: const LegendOptions(
+                      showLegends: true,
+                      legendShape: BoxShape.circle,
+                      legendTextStyle: TextStyle(fontSize: 15),
+                      legendPosition: LegendPosition.right,
+                      showLegendsInRow: true),
+                  gradientList: gradientList,
                 ),
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 35,
-            ),
-            const Text('CPU Info'),
-            Container(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: PieChart(
-                    dataMap: dataMap,
-                    colorList: colorList,
-                    chartRadius: MediaQuery.of(context).size.width / 2,
-                    // centerText: "Budget",
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 35,
+          ),
+          const Text('CPU Info'),
+          Container(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: PieChart(
+                  dataMap: dataMap,
+                  colorList: colorList,
+                  chartRadius: MediaQuery.of(context).size.width / 2,
+                  // centerText: "Budget",
 
-                    ringStrokeWidth: 24,
-                    animationDuration: const Duration(seconds: 3),
-                    chartValuesOptions: const ChartValuesOptions(
-                        showChartValues: true,
-                        showChartValuesOutside: true,
-                        showChartValuesInPercentage: true,
-                        showChartValueBackground: false),
-                    legendOptions: const LegendOptions(
-                        showLegends: true,
-                        legendShape: BoxShape.circle,
-                        legendTextStyle: TextStyle(fontSize: 15),
-                        legendPosition: LegendPosition.right,
-                        showLegendsInRow: true),
-                    gradientList: gradientList,
-                  ),
+                  ringStrokeWidth: 24,
+                  animationDuration: const Duration(seconds: 3),
+                  chartValuesOptions: const ChartValuesOptions(
+                      showChartValues: true,
+                      showChartValuesOutside: true,
+                      showChartValuesInPercentage: true,
+                      showChartValueBackground: false),
+                  legendOptions: const LegendOptions(
+                      showLegends: true,
+                      legendShape: BoxShape.circle,
+                      legendTextStyle: TextStyle(fontSize: 15),
+                      legendPosition: LegendPosition.right,
+                      showLegendsInRow: true),
+                  gradientList: gradientList,
                 ),
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 35,
-            ),
-            const Text('CPU Info'),
-            Container(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: PieChart(
-                    dataMap: dataMap,
-                    colorList: colorList,
-                    chartRadius: MediaQuery.of(context).size.width / 2,
-                    // centerText: "Budget",
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 35,
+          ),
+          const Text('CPU Info'),
+          Container(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: PieChart(
+                  dataMap: dataMap,
+                  colorList: colorList,
+                  chartRadius: MediaQuery.of(context).size.width / 2,
+                  // centerText: "Budget",
 
-                    ringStrokeWidth: 24,
-                    animationDuration: const Duration(seconds: 3),
-                    chartValuesOptions: const ChartValuesOptions(
-                        showChartValues: true,
-                        showChartValuesOutside: true,
-                        showChartValuesInPercentage: true,
-                        showChartValueBackground: false),
-                    legendOptions: const LegendOptions(
-                        showLegends: true,
-                        legendShape: BoxShape.circle,
-                        legendTextStyle: TextStyle(fontSize: 15),
-                        legendPosition: LegendPosition.right,
-                        showLegendsInRow: true),
-                    gradientList: gradientList,
-                  ),
+                  ringStrokeWidth: 24,
+                  animationDuration: const Duration(seconds: 3),
+                  chartValuesOptions: const ChartValuesOptions(
+                      showChartValues: true,
+                      showChartValuesOutside: true,
+                      showChartValuesInPercentage: true,
+                      showChartValueBackground: false),
+                  legendOptions: const LegendOptions(
+                      showLegends: true,
+                      legendShape: BoxShape.circle,
+                      legendTextStyle: TextStyle(fontSize: 15),
+                      legendPosition: LegendPosition.right,
+                      showLegendsInRow: true),
+                  gradientList: gradientList,
+                  // Body2(),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

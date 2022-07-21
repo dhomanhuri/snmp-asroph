@@ -14,52 +14,56 @@ class Body extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [Colors.blueAccent, Colors.white])),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 100,
-            ),
-            Image.network(
-              'https://akupintar.id/documents/20143/0/LOGO+POLITEKNIK+NEGERI+MALANG.png/949b5c7d-1fd2-121d-c1ad-f275911cb955?version=1.0&t=1519104037264&imagePreview=1',
-              width: 200,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 23,
-              // width: 400,
-            ),
-            const Text(
-              'SNMP',
-              style: TextStyle(
-                fontSize: 29,
-                fontWeight: FontWeight.bold,
+        child: Padding(
+          padding: const EdgeInsets.all(13.0),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 100,
               ),
-            ),
-            const Text('Simple Network Management Protocol'),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 3,
-              // width: 400,
-            ),
-            SizedBox(
-              width: 400,
-              height: 60,
-              child: OutlinedButton.icon(
-                icon: const Icon(Icons.navigate_next),
-                label: const Text("Berikutnya"),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const DevicePage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  side: const BorderSide(width: 2.0, color: Colors.black),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32.0),
-                  ),
+              Image.network(
+                'https://akupintar.id/documents/20143/0/LOGO+POLITEKNIK+NEGERI+MALANG.png/949b5c7d-1fd2-121d-c1ad-f275911cb955?version=1.0&t=1519104037264&imagePreview=1',
+                width: 200,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 23,
+                // width: 400,
+              ),
+              const Text(
+                'SNMP',
+                style: TextStyle(
+                  fontSize: 29,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            )
-          ],
+              const Text('Simple Network Management Protocol'),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 3,
+                // width: 400,
+              ),
+              SizedBox(
+                width: 400,
+                height: 60,
+                child: OutlinedButton.icon(
+                  icon: const Icon(Icons.navigate_next),
+                  label: const Text("Berikutnya"),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DevicePage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    side: const BorderSide(width: 2.0, color: Colors.black),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ));
   }
 }
