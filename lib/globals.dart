@@ -1,4 +1,5 @@
 library snmp.globals;
 
-String ip = '192.168.1.3';
+String ip = '';
 String name = '';
+bool login = false;

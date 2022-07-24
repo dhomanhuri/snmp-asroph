@@ -28,7 +28,7 @@ class _BodyState extends State<Body> {
     print(message.pdu.varbinds[0]);
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
-    setState(() {});
+    //   setState(() {});
   }
 
   @override
@@ -64,6 +64,21 @@ class _BodyState extends State<Body> {
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 30,
+          ),
+          Text(
+            'Nama : ',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 60,
+          ),
+          Text(globals.name),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 60,
           ),
           Text(
             'Server IP : ',

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:dart_snmp/dart_snmp.dart';
 import 'package:snmp/globals.dart' as globals;
@@ -8,6 +7,7 @@ import 'package:snmp/globals.dart' as globals;
 import 'dart:core';
 
 import 'package:snmp/page/networkinfo/body/charttest.dart';
+import 'package:snmp/page/networkinfo/body/charttestOut.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -29,23 +29,24 @@ class _BodyState extends State<Body> {
       ether5out;
   List<String> interfaces = [];
   String data = 'data';
+  @override
   void initState() {
     super.initState();
     // _getInterface();
     // etherfunc(3);
-    // Timer.periodic(const Duration(seconds: 5), (timer) {
-    //   print(DateTime.now());
-    //   bytesin1();
-    //   bytesout1();
-    //   bytesin2();
-    //   bytesout2();
-    //   bytesin3();
-    //   bytesout3();
-    //   bytesin4();
-    //   bytesout4();
-    //   bytesin5();
-    //   bytesout5();
-    // });
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      print(DateTime.now());
+      bytesin1();
+      bytesout1();
+      bytesin2();
+      bytesout2();
+      bytesin3();
+      bytesout3();
+      bytesin4();
+      bytesout4();
+      bytesin5();
+      bytesout5();
+    });
   }
 
   Future<void> _getInterface() async {
@@ -277,13 +278,6 @@ class _BodyState extends State<Body> {
               child: DataTable(
                 columns: const [
                   DataColumn(
-                    label: Text(
-                      '#',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  DataColumn(
                       label: Text('Name',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold))),
@@ -294,31 +288,31 @@ class _BodyState extends State<Body> {
                 ],
                 rows: [
                   DataRow(cells: [
-                    DataCell(Text('1')),
-                    DataCell(Text('Ether0')),
+                    // DataCell(Text('1')),
+                    DataCell(Text('Ether1')),
                     DataCell(Text(
                         ether1in.toString() + ' / ' + ether1out.toString())),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text('2')),
-                    DataCell(Text('Ether1')),
+                    // DataCell(Text('2')),
+                    DataCell(Text('Ether2')),
                     DataCell(Text(
                         ether2in.toString() + ' / ' + ether2out.toString())),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text('3')),
-                    DataCell(Text('Ether2')),
+                    // DataCell(Text('3')),
+                    DataCell(Text('Ether3')),
                     DataCell(Text(
                         ether3in.toString() + ' / ' + ether3out.toString())),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text('4')),
+                    // DataCell(Text('4')),
                     DataCell(Text('Ether4')),
                     DataCell(Text(
                         ether4in.toString() + ' / ' + ether4out.toString())),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text('5')),
+                    // DataCell(Text('5')),
                     DataCell(Text('Ether5')),
                     DataCell(Text(
                         ether5in.toString() + ' / ' + ether5out.toString())),
@@ -328,41 +322,30 @@ class _BodyState extends State<Body> {
             ),
             SizedBox(height: MediaQuery.of(context).size.height / 42),
             const Text(
-              'Traffict List :',
+              'Traffict Graph :',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            // SizedBox(height: MediaQuery.of(context).size.height / 42),
-            ChartTest(),
-            // Container(
-            //   width: double.infinity,
-            //   height: 200,
-            //   child: LineChart(
-            //     LineChartData(
-            //       maxX: 8,
-            //       maxY: 8,
-            //       minX: 0,
-            //       minY: 0,
-            //       lineBarsData: [
-            //         LineChartBarData(
-            //           spots: [
-            //             FlSpot(12.21, 0),
-            //             FlSpot(1, 5),
-            //             FlSpot(2, 6),
-            //             FlSpot(3, 2),
-            //             FlSpot(4, 8),
-            //             FlSpot(5, 3),
-            //             FlSpot(6, 4),
-            //             FlSpot(7, 2),
-            //             FlSpot(8, 2),
-            //           ],
-            //           isCurved: true,
-            //           colors: [Colors.black, Colors.grey],
-            //           barWidth: 5,
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            // )
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 5 In')),
+            const ChartTest(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 5 Out')),
+            const ChartTestOut(),
+            Center(
+              child: SizedBox(
+                height: 70,
+                width: 320,
+                child: Card(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text('Y Axis : MegaBytes diterima/terkirim'),
+                      Text('X Axis : Data ke - n'),
+                    ],
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

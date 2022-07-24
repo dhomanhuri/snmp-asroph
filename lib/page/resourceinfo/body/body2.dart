@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dart_snmp/dart_snmp.dart';
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'dart:async';
 import 'package:snmp/globals.dart' as globals;
@@ -17,15 +18,17 @@ class _Body2State extends State<Body2> {
   late List<ResourceLoad> _chartData;
   late List<ResourceLoadmem> _chartDatamem;
   late TooltipBehavior _tooltipBehavior;
+  int _usedMem = 0, _totalMem = 0;
   String uptime = '';
   int cpuload = 0;
   @override
   void initState() {
     _chartData = getChartData();
-    _chartDatamem = getChartDatamem();
     _tooltipBehavior = TooltipBehavior(enable: true);
 
     Timer.periodic(const Duration(seconds: 5), updateDataSource);
+    totalMem();
+    usedMem();
     super.initState();
     // getcpuusage();
   }
@@ -34,7 +37,7 @@ class _Body2State extends State<Body2> {
   void updateDataSource(Timer timer) {
     // int value = bytesin5() ;
     bytesin5();
-    testGet();
+    // testGet();
     print('object' + uptime.toString());
   }
 
@@ -57,23 +60,23 @@ class _Body2State extends State<Body2> {
     return int.parse(listname[1]);
   }
 
-  String? cpuusage;
-  Future<String> getcpuusage() async {
-    String devicename = '';
-    List<String> listname = [];
-    var target = InternetAddress(globals.ip);
-    var session = await Snmp.createSession(target);
-    var oid = Oid.fromString('1.3.6.1.4.1.14988.1.1.3.14.0'); // sysDesc
-    var message = await session.get(oid);
-    // print(message.pdu.varbinds[0]);
-    devicename = message.pdu.varbinds[0].toString();
-    listname = devicename.split(':');
-    cpuload = int.parse(listname[1]);
-    print('gataa' + cpuload.toString());
-    return devicename;
-  }
+  // String? cpuusage;
+  // Future<String> getcpuusage() async {
+  //   String devicename = '';
+  //   List<String> listname = [];
+  //   var target = InternetAddress(globals.ip);
+  //   var session = await Snmp.createSession(target);
+  //   var oid = Oid.fromString('1.3.6.1.4.1.14988.1.1.3.14.0'); // sysDesc
+  //   var message = await session.get(oid);
+  //   // print(message.pdu.varbinds[0]);
+  //   devicename = message.pdu.varbinds[0].toString();
+  //   listname = devicename.split(':');
+  //   cpuload = int.parse(listname[1]);
+  //   print('gataa' + cpuload.toString());
+  //   return devicename;
+  // }
 
-  Future<String> testGet() async {
+  Future<String> usedMem() async {
     String devicename = '';
     List<String> listname = [];
     var target = InternetAddress(globals.ip);
@@ -86,6 +89,25 @@ class _Body2State extends State<Body2> {
     listname = devicename.split(':');
     print('deviceTest' + devicename);
     // cpuload = int.parse(listname[1]);
+    print('gataa' + cpuload.toString());
+    _usedMem = int.parse(listname[1]);
+    _chartDatamem = getChartDatamem(_usedMem, _totalMem);
+    return devicename;
+  }
+
+  Future<String> totalMem() async {
+    String devicename = '';
+    List<String> listname = [];
+    var target = InternetAddress(globals.ip);
+    var session = await Snmp.createSession(target);
+    // var oid = Oid.fromString('1.3.6.1.2.1.25.2.3.1.6.65536'); // used mmory
+    var oid = Oid.fromString('1.3.6.1.2.1.25.2.3.1.5.65536'); // total mmory
+    var message = await session.get(oid);
+    // print(message.pdu.varbinds[0]);
+    devicename = message.pdu.varbinds[0].toString();
+    listname = devicename.split(':');
+    print('deviceTest' + devicename);
+    _totalMem = int.parse(listname[1]);
     print('gataa' + cpuload.toString());
     return devicename;
   }
@@ -133,6 +155,24 @@ class _Body2State extends State<Body2> {
             ),
             Container(
               child: Card(
+                // child: SfCircularChart(
+                //   title: ChartTitle(text: 'Failure Chart'),
+                //   legend: Legend(
+                //       isVisible: true,
+                //       overflowMode: LegendItemOverflowMode.wrap),
+                //   tooltipBehavior: _tooltipBehavior,
+                //   series: <CircularSeries>[
+                //     PieSeries<ResourceLoadmem, String>(
+                //       dataSource: _chartDatamem,
+                //       xValueMapper: (ResourceLoadmem data, _) => data.nameRes,
+                //       yValueMapper: (ResourceLoadmem data, _) =>
+                //           data.memavailable,
+                //       dataLabelSettings: DataLabelSettings(isVisible: true),
+                //       enableTooltip: true,
+                //     ),
+                //   ],
+                // ),
+
                 child: SfCircularChart(
                   title: ChartTitle(text: 'Memory Load'),
                   legend: Legend(
@@ -155,7 +195,7 @@ class _Body2State extends State<Body2> {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 70,
               child: Card(child: Center(child: Text('Up Time : ' + uptime))),
@@ -174,10 +214,10 @@ class _Body2State extends State<Body2> {
     return chartData;
   }
 
-  List<ResourceLoadmem> getChartDatamem() {
+  List<ResourceLoadmem> getChartDatamem(int a, int b) {
     final List<ResourceLoadmem> chartData = [
-      ResourceLoadmem('Load', 31600),
-      ResourceLoadmem('Available', 131072 - 31600)
+      ResourceLoadmem('Load', a),
+      ResourceLoadmem('Available', b - a)
     ];
     return chartData;
   }

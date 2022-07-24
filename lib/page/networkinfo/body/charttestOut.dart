@@ -7,14 +7,14 @@ import 'dart:async';
 import 'package:snmp/globals.dart' as globals;
 import 'package:dart_snmp/dart_snmp.dart';
 
-class ChartTest extends StatefulWidget {
-  const ChartTest({Key? key}) : super(key: key);
+class ChartTestOut extends StatefulWidget {
+  const ChartTestOut({Key? key}) : super(key: key);
 
   @override
-  State<ChartTest> createState() => _ChartTestState();
+  State<ChartTestOut> createState() => _ChartTestOutState();
 }
 
-class _ChartTestState extends State<ChartTest> {
+class _ChartTestOutState extends State<ChartTestOut> {
   late List<LiveData> _chartData;
   late TooltipBehavior _tooltipBehavior;
   late ChartSeriesController _chartSeriesController;
@@ -32,16 +32,14 @@ class _ChartTestState extends State<ChartTest> {
     return SafeArea(
       child: SfCartesianChart(
         // title: ChartTitle(text: 'coba'),
-        legend: Legend(
-          isVisible: false,
-        ),
+        legend: Legend(isVisible: false),
         tooltipBehavior: _tooltipBehavior,
         series: <ChartSeries<LiveData, int>>[
           LineSeries<LiveData, int>(
               onRendererCreated: (ChartSeriesController controller) {
                 _chartSeriesController = controller;
               },
-              name: 'Ether 5 In',
+              name: 'Ether 5 Out',
               dataSource: _chartData,
               xValueMapper: (LiveData sales, _) => sales.time,
               yValueMapper: (LiveData sales, _) => sales.speed,
@@ -59,7 +57,7 @@ class _ChartTestState extends State<ChartTest> {
     List<String> listname = [];
     var target = InternetAddress(globals.ip);
     var session = await Snmp.createSession(target);
-    var oid = Oid.fromString('1.3.6.1.2.1.31.1.1.1.6.5'); // sysDesc
+    var oid = Oid.fromString('1.3.6.1.2.1.31.1.1.1.10.5'); // sysDesc
     var message = await session.get(oid);
     // print(message.pdu.varbinds[0]);
     devicename = message.pdu.varbinds[0].toString();

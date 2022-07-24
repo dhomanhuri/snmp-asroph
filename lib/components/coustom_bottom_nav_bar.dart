@@ -90,18 +90,18 @@ class CustomBottomNavBar extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const ResourceInfo()),
                 ),
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.monitor,
-                  color: MenuState.profile == selectedMenu
-                      ? Colors.grey
-                      : inActiveIconColor,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const History()),
-                ),
-              ),
+              // IconButton(
+              //   icon: Icon(
+              //     Icons.monitor,
+              //     color: MenuState.profile == selectedMenu
+              //         ? Colors.grey
+              //         : inActiveIconColor,
+              //   ),
+              //   onPressed: () => Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => const History()),
+              //   ),
+              // ),
             ],
           )),
     );

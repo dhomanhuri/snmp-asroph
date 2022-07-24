@@ -15,7 +15,7 @@ class _TestState extends State<Test> {
   @override
   void initState() {
     super.initState();
-    print("asdsad");
+    // print("asdsad");
     init();
   }
 
@@ -23,16 +23,18 @@ class _TestState extends State<Test> {
     var target = InternetAddress('192.168.1.3');
     var session = await Snmp.createSession(target);
     var oid = Oid.fromString('1.3.6.1.2.1.31.1.1.1.6.1'); // sysDesc
+    // ignore: unused_local_variable
     var message = await session.get(oid);
-    print(message.pdu.varbinds);
+    // print(message.pdu.varbinds);
   }
 
   void systeminfo() async {
     var target = InternetAddress('192.168.1.3');
     var session = await Snmp.createSession(target);
     var oid = Oid.fromString('1.3.6.1.2.1.31.1.1.1.6.1'); // sysDesc
+    // ignore: unused_local_variable
     var message = await session.get(oid);
-    print(message.pdu.varbinds[0]);
+    // print(message.pdu.varbinds[0]);
   }
   // void tests(){
   //   Varbind.fromBytes(Uint8List bytes) {
@@ -49,13 +51,11 @@ class _TestState extends State<Test> {
       appBar: AppBar(
         title: const Text("asd"),
       ),
-      body: Container(
-        child: IconButton(
-            onPressed: () {
-              init();
-            },
-            icon: const Icon(Icons.abc)),
-      ),
+      body: IconButton(
+          onPressed: () {
+            init();
+          },
+          icon: const Icon(Icons.abc)),
     );
   }
 }
