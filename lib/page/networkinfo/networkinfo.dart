@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:snmp/page/networkinfo/body/Body.dart';
-import 'package:snmp/page/networkinfo/body/charttest.dart';
 
 import '../../components/coustom_bottom_nav_bar.dart';
 import '../../enums.dart';
 
 class NetworkInfo extends StatelessWidget {
-  const NetworkInfo({Key? key}) : super(key: key);
+  const NetworkInfo({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       // appBar: AppBar(
       //   title: const Text('network info'),
       // ),
-      body: const Body(),
+      body: Body(),
       bottomNavigationBar:
-          const CustomBottomNavBar(selectedMenu: MenuState.favourite),
+          CustomBottomNavBar(selectedMenu: MenuState.favourite),
       resizeToAvoidBottomInset: true,
     );
   }

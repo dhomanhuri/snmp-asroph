@@ -8,27 +8,29 @@ import 'dart:async';
 import 'package:snmp/globals.dart' as globals;
 
 class Body2 extends StatefulWidget {
-  const Body2({Key? key}) : super(key: key);
+  const Body2({Key key}) : super(key: key);
 
   @override
   State<Body2> createState() => _Body2State();
 }
 
 class _Body2State extends State<Body2> {
-  late List<ResourceLoad> _chartData;
-  late List<ResourceLoadmem> _chartDatamem;
-  late TooltipBehavior _tooltipBehavior;
+  // late List<ResourceLoad> _chartData;
+  List<ResourceLoadmem> _chartDatamem;
+  TooltipBehavior _tooltipBehavior;
   int _usedMem = 0, _totalMem = 0;
   String uptime = '';
   int cpuload = 0;
   @override
   void initState() {
-    _chartData = getChartData();
+    // _chartData = getChartData();
     _tooltipBehavior = TooltipBehavior(enable: true);
 
     Timer.periodic(const Duration(seconds: 5), updateDataSource);
     totalMem();
     usedMem();
+
+    getcpuusage();
     super.initState();
     // getcpuusage();
   }
@@ -38,7 +40,7 @@ class _Body2State extends State<Body2> {
     // int value = bytesin5() ;
     bytesin5();
     // testGet();
-    print('object' + uptime.toString());
+    // print('object' + uptime.toString());
   }
 
   Future<int> bytesin5() async {
@@ -61,20 +63,20 @@ class _Body2State extends State<Body2> {
   }
 
   // String? cpuusage;
-  // Future<String> getcpuusage() async {
-  //   String devicename = '';
-  //   List<String> listname = [];
-  //   var target = InternetAddress(globals.ip);
-  //   var session = await Snmp.createSession(target);
-  //   var oid = Oid.fromString('1.3.6.1.4.1.14988.1.1.3.14.0'); // sysDesc
-  //   var message = await session.get(oid);
-  //   // print(message.pdu.varbinds[0]);
-  //   devicename = message.pdu.varbinds[0].toString();
-  //   listname = devicename.split(':');
-  //   cpuload = int.parse(listname[1]);
-  //   print('gataa' + cpuload.toString());
-  //   return devicename;
-  // }
+  Future<String> getcpuusage() async {
+    String devicename = '';
+    List<String> listname = [];
+    var target = InternetAddress(globals.ip);
+    var session = await Snmp.createSession(target);
+    var oid = Oid.fromString('1.3.6.1.4.1.14988.1.1.3.14.0'); // sysDesc
+    var message = await session.get(oid);
+    // print(message.pdu.varbinds[0]);
+    devicename = message.pdu.varbinds[0].toString();
+    listname = devicename.split(':');
+    cpuload = int.parse(listname[1]);
+    // print('gataa' + cpuload.toString());
+    return devicename;
+  }
 
   Future<String> usedMem() async {
     String devicename = '';
@@ -87,9 +89,9 @@ class _Body2State extends State<Body2> {
     // print(message.pdu.varbinds[0]);
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
-    print('deviceTest' + devicename);
+    // print('deviceTest' + devicename);
     // cpuload = int.parse(listname[1]);
-    print('gataa' + cpuload.toString());
+    // print('gataa' + cpuload.toString());
     _usedMem = int.parse(listname[1]);
     _chartDatamem = getChartDatamem(_usedMem, _totalMem);
     return devicename;
@@ -106,15 +108,15 @@ class _Body2State extends State<Body2> {
     // print(message.pdu.varbinds[0]);
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
-    print('deviceTest' + devicename);
+    // print('deviceTest' + devicename);
     _totalMem = int.parse(listname[1]);
-    print('gataa' + cpuload.toString());
+    // print('gataa' + cpuload.toString());
     return devicename;
   }
 
   @override
   Widget build(BuildContext context) {
-    TooltipBehavior tooltipBehavior;
+    // TooltipBehavior tooltipBehavior;
     return Container(
       padding: const EdgeInsets.all(11),
       width: double.infinity,
@@ -127,72 +129,68 @@ class _Body2State extends State<Body2> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Container(
-              child: Card(
-                child: SfCircularChart(
-                  title: ChartTitle(text: 'Cpu Load'),
-                  legend: Legend(
-                    isVisible: true,
-                    overflowMode: LegendItemOverflowMode.wrap,
-                  ),
-                  tooltipBehavior: _tooltipBehavior,
-                  // tooltipBehavior = _tooltipBehavior,
-                  series: <CircularSeries>[
-                    PieSeries<ResourceLoad, String>(
-                      dataSource: _chartData,
-                      xValueMapper: (ResourceLoad data, _) => data.nameRes,
-                      yValueMapper: (ResourceLoad data, _) => data.cpuavailable,
-                      dataLabelSettings: DataLabelSettings(isVisible: true),
-                      enableTooltip: true,
-                    )
-                    // DataLabelSettings:
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              child: Card(
-                // child: SfCircularChart(
-                //   title: ChartTitle(text: 'Failure Chart'),
-                //   legend: Legend(
-                //       isVisible: true,
-                //       overflowMode: LegendItemOverflowMode.wrap),
-                //   tooltipBehavior: _tooltipBehavior,
-                //   series: <CircularSeries>[
-                //     PieSeries<ResourceLoadmem, String>(
-                //       dataSource: _chartDatamem,
-                //       xValueMapper: (ResourceLoadmem data, _) => data.nameRes,
-                //       yValueMapper: (ResourceLoadmem data, _) =>
-                //           data.memavailable,
-                //       dataLabelSettings: DataLabelSettings(isVisible: true),
-                //       enableTooltip: true,
-                //     ),
-                //   ],
-                // ),
+            // Card(
+            //   child: SfCircularChart(
+            //     title: ChartTitle(text: 'Cpu Load'),
+            //     legend: Legend(
+            //       isVisible: true,
+            //       overflowMode: LegendItemOverflowMode.wrap,
+            //     ),
+            //     tooltipBehavior: _tooltipBehavior,
+            //     // tooltipBehavior = _tooltipBehavior,
+            //     series: <CircularSeries>[
+            //       PieSeries<ResourceLoad, String>(
+            //         dataSource: _chartData,
+            //         xValueMapper: (ResourceLoad data, _) => data.nameRes,
+            //         yValueMapper: (ResourceLoad data, _) => data.cpuavailable,
+            //         dataLabelSettings: DataLabelSettings(isVisible: true),
+            //         enableTooltip: true,
+            //       )
+            //       // DataLabelSettings:
+            //     ],
+            //   ),
+            // ),
+            Card(
+              // child: SfCircularChart(
+              //   title: ChartTitle(text: 'Failure Chart'),
+              //   legend: Legend(
+              //       isVisible: true,
+              //       overflowMode: LegendItemOverflowMode.wrap),
+              //   tooltipBehavior: _tooltipBehavior,
+              //   series: <CircularSeries>[
+              //     PieSeries<ResourceLoadmem, String>(
+              //       dataSource: _chartDatamem,
+              //       xValueMapper: (ResourceLoadmem data, _) => data.nameRes,
+              //       yValueMapper: (ResourceLoadmem data, _) =>
+              //           data.memavailable,
+              //       dataLabelSettings: DataLabelSettings(isVisible: true),
+              //       enableTooltip: true,
+              //     ),
+              //   ],
+              // ),
 
-                child: SfCircularChart(
-                  title: ChartTitle(text: 'Memory Load'),
-                  legend: Legend(
-                    isVisible: true,
-                    overflowMode: LegendItemOverflowMode.wrap,
-                  ),
-                  tooltipBehavior: _tooltipBehavior,
-                  // tooltipBehavior = _tooltipBehavior,
-                  series: <CircularSeries>[
-                    PieSeries<ResourceLoadmem, String>(
-                      dataSource: _chartDatamem,
-                      xValueMapper: (ResourceLoadmem data, _) => data.nameRes,
-                      yValueMapper: (ResourceLoadmem data, _) =>
-                          data.memavailable,
-                      dataLabelSettings: DataLabelSettings(isVisible: true),
-                      enableTooltip: true,
-                    )
-                    // DataLabelSettings:
-                  ],
+              child: SfCircularChart(
+                title: ChartTitle(text: 'Memory Load'),
+                legend: Legend(
+                  isVisible: true,
+                  overflowMode: LegendItemOverflowMode.wrap,
                 ),
+                tooltipBehavior: _tooltipBehavior,
+                // tooltipBehavior = _tooltipBehavior,
+                series: <CircularSeries>[
+                  PieSeries<ResourceLoadmem, String>(
+                    dataSource: _chartDatamem,
+                    xValueMapper: (ResourceLoadmem data, _) => data.nameRes,
+                    yValueMapper: (ResourceLoadmem data, _) =>
+                        data.memavailable,
+                    dataLabelSettings: DataLabelSettings(isVisible: true),
+                    enableTooltip: true,
+                  )
+                  // DataLabelSettings:
+                ],
               ),
             ),
             SizedBox(
@@ -200,19 +198,26 @@ class _Body2State extends State<Body2> {
               height: 70,
               child: Card(child: Center(child: Text('Up Time : ' + uptime))),
             ),
+            SizedBox(
+              width: double.infinity,
+              height: 70,
+              child: Card(
+                  child: Center(
+                      child: Text('CPU Frequency : ' + cpuload.toString()))),
+            )
           ],
         ),
       ),
     );
   }
 
-  List<ResourceLoad> getChartData() {
-    final List<ResourceLoad> chartData = [
-      ResourceLoad('Load', cpuload),
-      ResourceLoad('Available', 60)
-    ];
-    return chartData;
-  }
+  // List<ResourceLoad> getChartData() {
+  //   final List<ResourceLoad> chartData = [
+  //     ResourceLoad('Load', cpuload),
+  //     ResourceLoad('Available', 60)
+  //   ];
+  //   return chartData;
+  // }
 
   List<ResourceLoadmem> getChartDatamem(int a, int b) {
     final List<ResourceLoadmem> chartData = [
@@ -223,11 +228,11 @@ class _Body2State extends State<Body2> {
   }
 }
 
-class ResourceLoad {
-  ResourceLoad(this.nameRes, this.cpuavailable);
-  final String nameRes;
-  final int cpuavailable;
-}
+// class ResourceLoad {
+//   ResourceLoad(this.nameRes, this.cpuavailable);
+//   final String nameRes;
+//   final int cpuavailable;
+// }
 
 class ResourceLoadmem {
   ResourceLoadmem(this.nameRes, this.memavailable);

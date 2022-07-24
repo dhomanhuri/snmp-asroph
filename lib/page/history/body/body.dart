@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class Body extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 40,
           ),
           Container(
-            margin: EdgeInsets.only(right: 20),
+            margin: const EdgeInsets.only(right: 20),
             width: double.infinity,
             height: 200,
             // color: Colors.pink,
@@ -87,7 +87,7 @@ class Body extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 40,
           ),
           Container(
-            margin: EdgeInsets.only(right: 20),
+            margin: const EdgeInsets.only(right: 20),
             width: double.infinity,
             height: 200,
             // color: Colors.pink,

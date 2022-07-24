@@ -1,5 +1,4 @@
 // import 'package:evelynapp/screen/HomeScreen.dart';
-import 'package:snmp/page/history/history.dart';
 import 'package:snmp/page/networkinfo/networkinfo.dart';
 import 'package:snmp/page/resourceinfo/resourceinfo.dart';
 import 'package:snmp/page/serverinfo/serverinfo.dart';
@@ -11,8 +10,8 @@ import 'package:snmp/enums.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
-    Key? key,
-    required this.selectedMenu,
+    Key key,
+    this.selectedMenu,
   }) : super(key: key);
 
   final MenuState selectedMenu;

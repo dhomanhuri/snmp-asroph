@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -10,14 +12,14 @@ import 'package:snmp/page/networkinfo/body/charttest.dart';
 import 'package:snmp/page/networkinfo/body/charttestOut.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({Key key}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
 }
 
 class _BodyState extends State<Body> {
-  String? ether1in,
+  String ether1in,
       ether1out,
       ether2in,
       ether2out,
@@ -35,7 +37,7 @@ class _BodyState extends State<Body> {
     // _getInterface();
     // etherfunc(3);
     Timer.periodic(const Duration(seconds: 5), (timer) {
-      print(DateTime.now());
+      // print(DateTime.now());
       bytesin1();
       bytesout1();
       bytesin2();
@@ -49,37 +51,37 @@ class _BodyState extends State<Body> {
     });
   }
 
-  Future<void> _getInterface() async {
-    int i = 6;
-    do {
-      i++;
-      interfaces.add(data);
-      data = etherfunc(i).toString();
-      print(data);
-      // print(length(data));
-    } while (data != 'done');
-  }
+  // Future<void> _getInterface() async {
+  //   int i = 6;
+  //   do {
+  //     i++;
+  //     interfaces.add(data);
+  //     data = etherfunc(i).toString();
+  //     print(data);
+  //     // print(length(data));
+  //   } while (data != 'done');
+  // }
 
-  Future<String> etherfunc(int i) async {
-    String devicename = '';
-    List<String> listname = [];
-    var target = InternetAddress(globals.ip);
-    var session = await Snmp.createSession(target);
-    var oid = Oid.fromString('1.3.6.1.2.1.2.2.1.2.' + i.toString()); // sysDesc
-    var message = await session.get(oid);
-    // print(message.pdu.varbinds[0]);
-    devicename = message.pdu.varbinds[0].toString();
-    listname = devicename.split(':');
-    int devnum = listname[1].length;
-    print('data : ' + devnum.toString());
-    if (devnum < 10) {
-      print(listname[1]);
-      return listname[1];
-    } else {
-      print('done');
-      return 'done';
-    }
-  }
+  // Future<String> etherfunc(int i) async {
+  //   String devicename = '';
+  //   List<String> listname = [];
+  //   var target = InternetAddress(globals.ip);
+  //   var session = await Snmp.createSession(target);
+  //   var oid = Oid.fromString('1.3.6.1.2.1.2.2.1.2.' + i.toString()); // sysDesc
+  //   var message = await session.get(oid);
+  //   // print(message.pdu.varbinds[0]);
+  //   devicename = message.pdu.varbinds[0].toString();
+  //   listname = devicename.split(':');
+  //   int devnum = listname[1].length;
+  //   // print('data : ' + devnum.toString());
+  //   if (devnum < 10) {
+  //     // print(listname[1]);
+  //     return listname[1];
+  //   } else {
+  //     // print('done');
+  //     return 'done';
+  //   }
+  // }
 
   Future<String> bytesin5() async {
     String devicename = '';
@@ -94,7 +96,7 @@ class _BodyState extends State<Body> {
     setState(() {
       ether5in = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
-    print(devicename);
+    // print(devicename);
     return devicename;
   }
 
@@ -109,7 +111,7 @@ class _BodyState extends State<Body> {
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
     setState(() {
-      ether5out = listname[1];
+      ether5out = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
     return listname[1];
   }
@@ -127,7 +129,7 @@ class _BodyState extends State<Body> {
     setState(() {
       ether4in = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
-    print(devicename);
+    // print(devicename);
     return devicename;
   }
 
@@ -142,7 +144,7 @@ class _BodyState extends State<Body> {
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
     setState(() {
-      ether4out = listname[1];
+      ether4out = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
     return listname[1];
   }
@@ -160,7 +162,7 @@ class _BodyState extends State<Body> {
     setState(() {
       ether3in = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
-    print(devicename);
+    // print(devicename);
     return devicename;
   }
 
@@ -175,7 +177,7 @@ class _BodyState extends State<Body> {
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
     setState(() {
-      ether3out = listname[1];
+      ether3out = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
     return listname[1];
   }
@@ -193,7 +195,7 @@ class _BodyState extends State<Body> {
     setState(() {
       ether2in = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
-    print(devicename);
+    // print(devicename);
     return devicename;
   }
 
@@ -208,7 +210,7 @@ class _BodyState extends State<Body> {
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
     setState(() {
-      ether2out = listname[1];
+      ether2out = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
     return listname[1];
   }
@@ -226,7 +228,7 @@ class _BodyState extends State<Body> {
     setState(() {
       ether1in = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
-    print(devicename);
+    // print(devicename);
     return devicename;
   }
 
@@ -241,7 +243,7 @@ class _BodyState extends State<Body> {
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
     setState(() {
-      ether1out = listname[1];
+      ether1out = (int.parse(listname[1]) / 1000).toString() + 'kB';
     });
     return listname[1];
   }
@@ -289,31 +291,31 @@ class _BodyState extends State<Body> {
                 rows: [
                   DataRow(cells: [
                     // DataCell(Text('1')),
-                    DataCell(Text('Ether1')),
+                    const DataCell(Text('Ether1')),
                     DataCell(Text(
                         ether1in.toString() + ' / ' + ether1out.toString())),
                   ]),
                   DataRow(cells: [
                     // DataCell(Text('2')),
-                    DataCell(Text('Ether2')),
+                    const DataCell(Text('Ether2')),
                     DataCell(Text(
                         ether2in.toString() + ' / ' + ether2out.toString())),
                   ]),
                   DataRow(cells: [
                     // DataCell(Text('3')),
-                    DataCell(Text('Ether3')),
+                    const DataCell(Text('Ether3')),
                     DataCell(Text(
                         ether3in.toString() + ' / ' + ether3out.toString())),
                   ]),
                   DataRow(cells: [
                     // DataCell(Text('4')),
-                    DataCell(Text('Ether4')),
+                    const DataCell(Text('Ether4')),
                     DataCell(Text(
                         ether4in.toString() + ' / ' + ether4out.toString())),
                   ]),
                   DataRow(cells: [
                     // DataCell(Text('5')),
-                    DataCell(Text('Ether5')),
+                    const DataCell(Text('Ether5')),
                     DataCell(Text(
                         ether5in.toString() + ' / ' + ether5out.toString())),
                   ]),

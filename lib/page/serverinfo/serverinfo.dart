@@ -5,7 +5,7 @@ import '../../components/coustom_bottom_nav_bar.dart';
 import '../../enums.dart';
 
 class ServerInfo extends StatelessWidget {
-  const ServerInfo({Key? key}) : super(key: key);
+  const ServerInfo({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

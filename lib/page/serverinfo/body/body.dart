@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:snmp/globals.dart' as globals;
 import 'package:dart_snmp/dart_snmp.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({Key key}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -15,6 +14,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   String devicename = '';
   List<String> listname = [];
+  @override
   void initState() {
     super.initState();
     devname();
@@ -25,7 +25,7 @@ class _BodyState extends State<Body> {
     var session = await Snmp.createSession(target);
     var oid = Oid.fromString('1.3.6.1.2.1.1.1.0'); // sysDesc
     var message = await session.get(oid);
-    print(message.pdu.varbinds[0]);
+    // print(message.pdu.varbinds[0]);
     devicename = message.pdu.varbinds[0].toString();
     listname = devicename.split(':');
     //   setState(() {});
@@ -65,7 +65,7 @@ class _BodyState extends State<Body> {
           SizedBox(
             height: MediaQuery.of(context).size.height / 30,
           ),
-          Text(
+          const Text(
             'Nama : ',
             style: TextStyle(
               fontSize: 16,
@@ -80,7 +80,7 @@ class _BodyState extends State<Body> {
           SizedBox(
             height: MediaQuery.of(context).size.height / 60,
           ),
-          Text(
+          const Text(
             'Server IP : ',
             style: TextStyle(
               fontSize: 16,

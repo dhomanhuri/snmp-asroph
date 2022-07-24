@@ -6,7 +6,7 @@ import 'package:snmp/page/serverinfo/serverinfo.dart';
 import 'package:snmp/globals.dart' as globals;
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({Key key}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -17,6 +17,7 @@ class _BodyState extends State<Body> {
     var target = InternetAddress(globals.ip);
     var session = await Snmp.createSession(target);
     var oid = Oid.fromString('1.3.6.1.2.1.1.1.0'); // sysDesc
+    // ignore: unused_local_variable
     var message = await session.get(oid);
     // print('session 2= ' + session.toString());
     // print('getdadata 2= ' + message.pdu.varbinds[0].toString());
@@ -133,7 +134,7 @@ class _BodyState extends State<Body> {
                     content: Text("Menghubungkan Server SNMP"),
                   ));
                   devname();
-                  print(globals.login);
+                  // print(globals.login);
                 }
                 // Navigator.push(
                 //   context,

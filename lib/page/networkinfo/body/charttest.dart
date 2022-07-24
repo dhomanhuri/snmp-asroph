@@ -8,16 +8,16 @@ import 'package:snmp/globals.dart' as globals;
 import 'package:dart_snmp/dart_snmp.dart';
 
 class ChartTest extends StatefulWidget {
-  const ChartTest({Key? key}) : super(key: key);
+  const ChartTest({Key key}) : super(key: key);
 
   @override
   State<ChartTest> createState() => _ChartTestState();
 }
 
 class _ChartTestState extends State<ChartTest> {
-  late List<LiveData> _chartData;
-  late TooltipBehavior _tooltipBehavior;
-  late ChartSeriesController _chartSeriesController;
+  List<LiveData> _chartData;
+  TooltipBehavior _tooltipBehavior;
+  ChartSeriesController _chartSeriesController;
   int value = 0;
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _ChartTestState extends State<ChartTest> {
     // setState(() {
     //   ether5in = (int.parse(listname[1]) / 1000).toString() + 'kB';
     // });
-    print(devicename);
+    // print(devicename);
     value = int.parse(listname[1]);
     return int.parse(listname[1]);
   }
@@ -76,7 +76,7 @@ class _ChartTestState extends State<ChartTest> {
   void updateDataSource(Timer timer) {
     // int value = bytesin5() ;
     bytesin5();
-    print('object' + value.toString());
+    // print('object' + value.toString());
     _chartData.add(LiveData(time++, value / 1000000));
     _chartData.removeAt(0);
     _chartSeriesController.updateDataSource(
