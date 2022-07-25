@@ -56,8 +56,9 @@ class _Body2State extends State<Body2> {
     // setState(() {
     //   ether5in = (int.parse(listname[1]) / 1000).toString() + 'kB';
     // });
+    List<String> endtime = listname[3].split(".");
     setState(() {
-      uptime = listname[1] + ':' + listname[2] + ':' + listname[3];
+      uptime = listname[1] + ':' + listname[2] + ':' + endtime[0];
     });
     return int.parse(listname[1]);
   }
@@ -203,7 +204,8 @@ class _Body2State extends State<Body2> {
               height: 70,
               child: Card(
                   child: Center(
-                      child: Text('CPU Frequency : ' + cpuload.toString()))),
+                      child: Text(
+                          'CPU Frequency : ' + cpuload.toString() + " Mhz"))),
             )
           ],
         ),

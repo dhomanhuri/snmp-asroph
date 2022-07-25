@@ -27,7 +27,9 @@ class _BodyState extends State<Body> {
     var message = await session.get(oid);
     // print(message.pdu.varbinds[0]);
     devicename = message.pdu.varbinds[0].toString();
-    listname = devicename.split(':');
+    setState(() {
+      listname = devicename.split(':');
+    });
     //   setState(() {});
   }
 

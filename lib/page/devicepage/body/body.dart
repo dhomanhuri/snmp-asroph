@@ -134,7 +134,6 @@ class _BodyState extends State<Body> {
                     content: Text("Menghubungkan Server SNMP"),
                   ));
                   devname();
-                  // print(globals.login);
                 }
                 // Navigator.push(
                 //   context,

@@ -19,16 +19,16 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  String ether1in,
-      ether1out,
-      ether2in,
-      ether2out,
-      ether3in,
-      ether3out,
-      ether4in,
-      ether4out,
-      ether5in,
-      ether5out;
+  String ether1in = "0 Kb",
+      ether1out = "0 Kb",
+      ether2in = "0 Kb",
+      ether2out = "0 Kb",
+      ether3in = "0 Kb",
+      ether3out = "0 Kb",
+      ether4in = "0 Kb",
+      ether4out = "0 Kb",
+      ether5in = "0 Kb",
+      ether5out = "0 Kb";
   List<String> interfaces = [];
   String data = 'data';
   @override
@@ -37,15 +37,15 @@ class _BodyState extends State<Body> {
     // _getInterface();
     // etherfunc(3);
     Timer.periodic(const Duration(seconds: 5), (timer) {
-      // print(DateTime.now());
-      bytesin1();
-      bytesout1();
-      bytesin2();
-      bytesout2();
-      bytesin3();
-      bytesout3();
-      bytesin4();
-      bytesout4();
+      //   // print(DateTime.now());
+      //   bytesin1();
+      //   bytesout1();
+      //   bytesin2();
+      //   bytesout2();
+      //   bytesin3();
+      //   bytesout3();
+      //   bytesin4();
+      //   bytesout4();
       bytesin5();
       bytesout5();
     });
