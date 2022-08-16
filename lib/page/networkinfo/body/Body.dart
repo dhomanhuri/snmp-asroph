@@ -9,7 +9,16 @@ import 'package:snmp/globals.dart' as globals;
 import 'dart:core';
 
 import 'package:snmp/page/networkinfo/body/charttest.dart';
+import 'package:snmp/page/networkinfo/body/charttest4.dart';
 import 'package:snmp/page/networkinfo/body/charttestOut.dart';
+import 'package:snmp/page/networkinfo/body/charttestOut3.dart';
+
+import 'charttest3.dart';
+import 'charttestOut4.dart';
+import 'charttest2.dart';
+import 'charttestOut2.dart';
+import 'charttest1.dart';
+import 'charttestOut1.dart';
 
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
@@ -36,19 +45,19 @@ class _BodyState extends State<Body> {
     super.initState();
     // _getInterface();
     // etherfunc(3);
-    Timer.periodic(const Duration(seconds: 5), (timer) {
-      //   // print(DateTime.now());
-      //   bytesin1();
-      //   bytesout1();
-      //   bytesin2();
-      //   bytesout2();
-      //   bytesin3();
-      //   bytesout3();
-      //   bytesin4();
-      //   bytesout4();
-      bytesin5();
-      bytesout5();
-    });
+    // Timer.periodic(const Duration(seconds: 5), (timer) {
+    //   //   // print(DateTime.now());
+    //   //   bytesin1();
+    //   //   bytesout1();
+    //   //   bytesin2();
+    //   //   bytesout2();
+    //   //   bytesin3();
+    //   //   bytesout3();
+    //   //   bytesin4();
+    //   //   bytesout4();
+    //   bytesin5();
+    //   bytesout5();
+    // });
   }
 
   // Future<void> _getInterface() async {
@@ -333,6 +342,30 @@ class _BodyState extends State<Body> {
             SizedBox(height: MediaQuery.of(context).size.height / 42),
             const Center(child: Text('Ether 5 Out')),
             const ChartTestOut(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 4 In')),
+            const ChartTest4(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 4 Out')),
+            const ChartTestOut4(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 3 In')),
+            const ChartTest3(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 3 Out')),
+            const ChartTestOut3(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 2 In')),
+            const ChartTest2(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 2 Out')),
+            const ChartTestOut2(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 1 In')),
+            const ChartTest1(),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
+            const Center(child: Text('Ether 1 Out')),
+            const ChartTestOut1(),
             Center(
               child: SizedBox(
                 height: 70,

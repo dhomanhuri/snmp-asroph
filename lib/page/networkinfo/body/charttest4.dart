@@ -7,14 +7,14 @@ import 'dart:async';
 import 'package:snmp/globals.dart' as globals;
 import 'package:dart_snmp/dart_snmp.dart';
 
-class ChartTest extends StatefulWidget {
-  const ChartTest({Key key}) : super(key: key);
+class ChartTest4 extends StatefulWidget {
+  const ChartTest4({Key key}) : super(key: key);
 
   @override
-  State<ChartTest> createState() => _ChartTestState();
+  State<ChartTest4> createState() => _ChartTest4State();
 }
 
-class _ChartTestState extends State<ChartTest> {
+class _ChartTest4State extends State<ChartTest4> {
   List<LiveData> _chartData;
   TooltipBehavior _tooltipBehavior;
   ChartSeriesController _chartSeriesController;
@@ -59,7 +59,7 @@ class _ChartTestState extends State<ChartTest> {
     List<String> listname = [];
     var target = InternetAddress(globals.ip);
     var session = await Snmp.createSession(target);
-    var oid = Oid.fromString('1.3.6.1.2.1.31.1.1.1.6.4'); // sysDesc
+    var oid = Oid.fromString('1.3.6.1.2.1.31.1.1.1.6.5'); // sysDesc
     var message = await session.get(oid);
     // print(message.pdu.varbinds[0]);
     devicename = message.pdu.varbinds[0].toString();
